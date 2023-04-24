@@ -1,0 +1,19 @@
+.btn-custom {
+    background-color: white;
+    color: blue;
+}
+
+.btn-custom:hover {
+    background-color: blue;
+    color: white;
+}
+
+.btn-link {
+    margin-top: 20px;
+}
+
+.btn-link:hover {
+    background-color: white;
+    text-decoration: none;
+}
+

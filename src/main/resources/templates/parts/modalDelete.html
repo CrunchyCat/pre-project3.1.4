@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:form="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="modal fade" th:fragment="delete-modal" th:id="'userDeleteModal'+${user.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete user</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:id="'form'+${user.id}"  th:action="@{/admin/delete}" th:method="DELETE">
+          <div class="form-group">
+            <label for="id" class="d-flex justify-content-center font-weight-bold">ID</label>
+            <input type="text" id="id" th:value="${user.id}" class="form-control" readonly>
+          </div>
+          <div class="form-group">
+            <label for="username1" class="d-flex justify-content-center font-weight-bold">firstName</label>
+            <input type="text" id="username1" class="form-control" placeholder="Enter name" th:value="${user.username}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="age1" class="d-flex justify-content-center font-weight-bold">age</label>
+            <input type="text" class="form-control" id="age1" placeholder="Enter age" th:value="${user.age}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="email1" class="d-flex justify-content-center font-weight-bold">Email</label>
+            <input type="email" class="form-control" id="email1" placeholder="Enter email" th:value="${user.email}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="password1" class="d-flex justify-content-center font-weight-bold">Password</label>
+            <input type="password" class="form-control" id="password1" th:value="${user.password}" readonly>
+          </div>
+
+          <div class="form-group text-center col-3">
+            <label for="roles1" style="font-weight: bold">Role</label>
+            <select class="form-control" id="roles1" name="roles">
+              <option value="1">USER</option>
+              <option value="2">ADMIN</option>
+            </select>
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <form th:method="DELETE" th:action="@{/admin/{id}/delete(id=${user.getId()})}">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

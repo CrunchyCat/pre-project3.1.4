@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../css/buttonStyle.css">
+  <link rel="stylesheet" type="text/css" href="../css/captionStyle.css">
+
+</head>
+<body>
+
+
+
+<th:block th:fragment="mainPattern">
+  <div th:replace="parts/navbarAuth :: navbarAuth"></div>
+  <div class="container-fluid min-vh-40">
+
+    <div id="myGrid">
+      <div class="row">
+<!--        левая часть общая для всех только кнопки разные, левая-->
+        <div class="col-lg-2 px-0" style="background-color: white">
+          <br/>
+          <br/>
+<!--          проверяю роль юзера и добавляю соответсттвующие кнопки-->
+          <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')') and #authorization.expression('hasRole(''ROLE_USER'')')}">
+            <div class="btn-group-vertical d-flex">
+              <button type="button" class="btn btn-lg btn-custom text-left" onclick="window.location.href='/admin'">Admin</button>
+              <button type="button" class="btn btn-lg btn-custom text-left" onclick="window.location.href='/user'">User</button>
+            </div>
+          </div>
+          <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')') and not #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <div class="btn-group-vertical d-flex">
+              <button type="button" class="btn btn-lg btn-custom text-left" onclick="window.location.href='/user'">User</button>
+            </div>
+          </div>
+        </div>
+<!--        вместо contentFragmentName буду вставлять фрагменты например для админа adminPanel, это правая часть экрана-->
+        <div class="col-lg-10" style="background-color: #f8f9fa">
+          <th:block th:replace="${contentFragmentName}"></th:block>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+
